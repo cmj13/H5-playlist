@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>h5新增的语义元素</title>
+</head>
+<style type="text/css">
+	aside {
+    width: 40%;
+    padding-left: .5rem;
+    margin-left: .5rem;
+    float: right;
+    box-shadow: inset 5px 0 5px -5px #29627e;
+    font-style: italic;
+    color: #29627e;
+}
+
+aside > p {
+    margin: .5rem;
+}
+
+p {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+</style>
+
+<body>
+	<article>
+      <header>         
+　　　　<h1>标题</h1>
+           <p>发表日期：<time pubdate="pubdate">2010/10/10</time></p>
+　　</header>
+　　<p>article的使用方法:article元素代表文档、页面或应用程序中独立的、完整的、可以独自被外部引用的内容。</p>
+	<p>article是一个特殊的section标签，它比section具有更明确的语义, 它代表一个独立的、完整的相关内容块。 div、section、article，语义是从无到有，逐渐增强的。div无任何语义，仅仅用作样式化或者脚本化的标签，对于一段主题性的内容，则就适用section，而假如这段内容可以脱离上下文，作为完整的独立存在的一段内容，则就适用 article。 原则上来说，能使用article的时候，也是可以使用section的，但是实际上，假如使用article更合适，那么就不要使用section。
+	</p>
+　　<footer>
+            <p><small>Copyright @ yiiyaa.net All Rights Reserverd</samll></p>
+　　</footer>
+</article>
+<hr>
+
+<article>
+　　<header>
+            <h1>article元素使用方法</h1>
+　　　　<p>发表日期：<time pubdate="pubdate">2010/10/10</time></p>
+　　</header>
+　　<p>此标签里显示的是article整个文章的主要内容，，下面的section元素里是对该文章的评论</p>
+　　<section>
+            <h2>评论</h2>
+　　　　<article>
+                  <header>
+　　　　　　　　<h3>发表者：maizi</h3>
+　　　　　　　　<p><time pubdate datetime="2016-6-14">1小时前</time></p>
+　　　　　　</header>  
+　　　　　　<p>这篇文章很不错啊，顶一下！</p>
+           </article> 
+　　　　<article>
+                  <header>            
+　　　　　　　　<h3>发表者：小妮</h3>
+                        <p><time pubdate datetime="2016-6-14T:21-26:00">1小时前</time></p>
+　　　　　　</header>
+　　　　<p>这篇文章很不错啊，对article解释的很详细</p>  
+　　　　</article>
+      </section>
+</article>
+<hr>
+<p>Salamanders are a group of amphibians with a lizard-like appearance, including short legs and a tail in both larval and adult forms.</p>
+
+<aside>
+    <p>The Rough-skinned Newt defends itself with a deadly neurotoxin.</p>
+</aside>
+
+<p>Several species of salamander inhabit the temperate rainforest of the Pacific Northwest, including the Ensatina, the Northwestern Salamander and the Rough-skinned Newt. Most salamanders are nocturnal, <mark>这里是mark的高亮</mark> hunt for insects, worms and other small creatures.</p>
+<hr>
+absc
+<details>123hao</details>
+<dialog open>
+<p>Hello H5!</p>
+</dialog>
+<hr>
+<!-- Simple pop-up dialog box containing a form -->
+<dialog id="favDialog">
+  <form method="dialog">
+    <p><label>Favorite animal:
+      <select>
+        <option></option>
+        <option>Brine shrimp</option>
+        <option>Red panda</option>
+        <option>Spider monkey</option>
+      </select>
+    </label></p>
+    <menu>
+      <button value="cancel">Cancel</button>
+      <button id="confirmBtn" value="default">Confirm</button>
+    </menu>
+  </form>
+</dialog>
+
+<menu>
+  <button id="updateDetails">Update details</button>
+</menu>
+
+<output aria-live="polite"></output>
+<hr>
+<ruby>12</ruby>
+
+<script>
+
+	(function() {
+	  var updateButton = document.getElementById('updateDetails');
+	  var favDialog = document.getElementById('favDialog');
+	  var outputBox = document.getElementsByTagName('output')[0];
+	  var selectEl = document.getElementsByTagName('select')[0];
+	  var confirmBtn = document.getElementById('confirmBtn');
+	
+  // “Update details” button opens the <dialog> modally
+  updateButton.addEventListener('click', function onOpen() {
+    if (typeof favDialog.showModal === "function") {
+      favDialog.showModal();
+    } else {
+      alert("The dialog API is not supported by this browser");
+    }
+  });
+  // "Favorite animal" input sets the value of the submit button
+  selectEl.addEventListener('change', function onSelect(e) {
+    confirmBtn.value = selectEl.value;
+  });
+  // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
+  favDialog.addEventListener('close', function onClose() {
+    outputBox.value = favDialog.returnValue + " button clicked - " + (new Date()).toString();
+  });
+})();
+</script>
+</body>
+</html>
